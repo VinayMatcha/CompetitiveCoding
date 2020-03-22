@@ -1,39 +1,48 @@
 package com.vinay.multithreading;
 
 
-class Processor {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class Worker {
+
+    private Lock lock = new ReentrantLock();
+    private Condition condition = lock.newCondition();
+
 
     public void produce() throws InterruptedException {
-        synchronized (this) {
-            System.out.println("We are in the produce method");
-            wait(10000);
-            System.out.println("Again Producer method");
-        }
+        lock.lock();
+        System.out.println("In the Producer method");
+        condition.await();
+        System.out.println("Again in Produce method");
+        lock.unlock();
     }
 
 
     public void consume() throws InterruptedException {
-        Thread.sleep(1000);
-        synchronized (this) {
-            System.out.println("We are in the consume method");
-            notifyAll();
-            System.out.println("Again consume method");
-        }
+        lock.lock();
+        Thread.sleep(2000);
+        System.out.println("In the Consumer method");
+        condition.signal();
+        System.out.println("Again in Consumer method");
+        lock.unlock();
     }
 
 }
 
 
-public class BasicWaitAndNotify {
-
+public class BasicLock {
 
     public static void main(String[] args) {
-        final Processor processor = new Processor();
+        final Worker worker = new Worker();
 
         Thread thread1 = new Thread(new Runnable() {
             public void run() {
                 try {
-                    processor.produce();
+                    worker.produce();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -43,7 +52,7 @@ public class BasicWaitAndNotify {
         Thread thread2 = new Thread(new Runnable() {
             public void run() {
                 try {
-                    processor.consume();
+                    worker.consume();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
