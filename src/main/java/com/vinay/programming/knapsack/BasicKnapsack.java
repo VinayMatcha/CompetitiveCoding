@@ -49,7 +49,7 @@ public class BasicKnapsack {
         return dp[capacity];
     }
 
-    private int bottomUpApproachMemory(int[] weights, int[] profits, int capacity, boolean printSelectedItems) {
+    public int bottomUpApproachMemory(int[] weights, int[] profits, int capacity, boolean printSelectedItems) {
         if (capacity <= 0 || profits.length <= 0)
             return 0;
         int dp[] = new int[capacity+1];
@@ -68,7 +68,7 @@ public class BasicKnapsack {
         return dp[capacity];
     }
 
-    private int bottomUpApproach(int[] weights, int[] profits, int capacity, boolean printSelectedItems) {
+    public int bottomUpApproach(int[] weights, int[] profits, int capacity, boolean printSelectedItems) {
         if (capacity <= 0 || profits.length <= 0)
             return 0;
         int dp[][] = new int[weights.length][capacity+1];
@@ -91,7 +91,7 @@ public class BasicKnapsack {
     }
 
 
-    private void printSelectedWeights(int[] weights, int[] profits, int capacity, int[][] dp) {
+    public void printSelectedWeights(int[] weights, int[] profits, int capacity, int[][] dp) {
         System.out.print("Selected weights: \n");
         int totalProfit = dp[weights.length-1][capacity];
         for (int i=weights.length-1; i>0; i--) {
@@ -107,7 +107,7 @@ public class BasicKnapsack {
 
     }
 
-    private int knapSackRecursive(int[] weights, int[] profits, int capacity, int currentIndex, int[][] dp) {
+    public int knapSackRecursive(int[] weights, int[] profits, int capacity, int currentIndex, int[][] dp) {
         if (capacity <= 0 || profits.length <= currentIndex)
             return 0;
         if (dp[currentIndex][capacity] != 0)
@@ -124,7 +124,7 @@ public class BasicKnapsack {
 
 
 
-    private int bruteForceMethod(int[] weights, int[] profits, int capacity, int currentIndex) {
+    public int bruteForceMethod(int[] weights, int[] profits, int capacity, int currentIndex) {
         if (capacity <= 0 || profits.length <= currentIndex)
             return 0;
         int profit1 = 0;

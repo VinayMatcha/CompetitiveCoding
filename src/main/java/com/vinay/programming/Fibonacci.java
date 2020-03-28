@@ -15,7 +15,7 @@ public class Fibonacci {
         return calcuateFibanocciRecursive(memorize, n);
     }
 
-    private int calcuateFibanocciRecursive(int[] memorize, int n) {
+    public int calcuateFibanocciRecursive(int[] memorize, int n) {
         if(n < 2 )
             return n;
         if(memorize[n]!=0)
