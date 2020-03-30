@@ -1,4 +1,4 @@
-package com.vinay.programming;
+package com.vinay.programming.fibonacciPattern;
 
 public class Fibonacci {
 
